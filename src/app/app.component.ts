@@ -49,11 +49,19 @@ export class AppComponent implements OnInit {
   fetchTodos() {
     this.loading = true;
     this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=2')
-    .pipe(delay(1500))
+    .pipe(delay(500))
     .subscribe(response => {
       console.log('get response', response);
       this.todos = response;
       this.loading = false;
     })
   }
+
+  removeTodo(id: number) {
+      this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .subscribe(response => {
+        this.todos = this.todos.filter( t => t.id !== id )
+      })
+  }
+
 }
