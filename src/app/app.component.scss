@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/forms";
+
+.todos-complete {
+  text-decoration: line-through;
+}
+
+.todo-name {
+  font-size: $font-size-lg;
+  line-height: 1;
+}
