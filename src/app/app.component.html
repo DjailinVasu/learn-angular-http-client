@@ -5,8 +5,11 @@
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="card mb-4">
+          <div class="card-header">
+            <h2 class="card-title m-0">Add new todo</h2>
+          </div>
           <div class="card-body">
-            <!-- <h5 class="card-title">Title</h5> -->
+
 
             <div class="form-group">
               <label for="name">Название</label>
@@ -19,51 +22,68 @@
               />
             </div>
 
-            <div class="btn-group">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="addTodo()"
-              >
-                Добавить
-              </button>
-              <button type="button" class="btn btn-secondary">Загрузить</button>
-            </div>
+            <button type="button" class="btn btn-secondary" (click)="addTodo()">
+              Добавить
+            </button>
           </div>
         </div>
       </div>
 
       <div class="col-12 col-md-6">
         <div class="card">
-          <div class="list-group" *ngFor="let todo of todos">
-            <div class="list-group-item">
-              <div class="row">
-                <div class="col">
-                  <span
-                    [class.todos-complete]="todo.completed"
-                    class="font-weight-light todo-name"
-                  >
-                    {{ todo.title }}
-                  </span>
-                </div>
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            <h2 class="card-title m-0">My Todos</h2>
 
-                <div class="col d-flex justify-content-end align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm">
-                      Завершить
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-danger btn-sm"
-                      [disabled]="todo.completed"
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              (click)="fetchTodos()"
+            >
+              Загрузить
+            </button>
+
+          </div>
+          <div class="card-body" *ngIf="!loading; else loadingBlock">
+            <div class="list-group" *ngFor="let todo of todos">
+              <div class="list-group-item mb-2">
+                <div class="row">
+                  <div class="col">
+                    <span
+                      [class.todos-complete]="todo.completed"
+                      class="font-weight-light todo-name"
                     >
-                      Удалить
-                    </button>
+                      {{ todo.title }}
+                    </span>
+                  </div>
+
+                  <div
+                    class="col d-flex justify-content-end align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-sm">
+                        Завершить
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        [disabled]="todo.completed"
+                      >
+                        Удалить
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <ng-template #loadingBlock>
+              <div class="card-body">
+                  <p>Loading...</p>
+              </div>
+          </ng-template>
         </div>
       </div>
     </div>
