@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { delay, catchError } from 'rxjs/operators';
+import { delay, catchError, map } from 'rxjs/operators';
 
 export interface Todo {
   completed: boolean,
@@ -29,9 +29,14 @@ export class TodosService {
     params = params.set('_some', '3');
 
     return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos', {
-      params
+      params,
+      observe: 'response'
     })
     .pipe(
+      map(response => {
+        console.log('response', response);
+        return response.body;
+      }),
       delay(500),
       catchError(error => {
         console.log('Error:', error.message);
