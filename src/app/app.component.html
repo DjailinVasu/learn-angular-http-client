@@ -60,13 +60,17 @@
                       class="col d-flex justify-content-end align-items-center"
                     >
                       <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm"
+                          (click)="completeTodo(todo.id)"
+                          [disabled]="todo.completed"
+                        >
                           Завершить
                         </button>
                         <button
                           type="button"
                           class="btn btn-danger btn-sm"
-                          [disabled]="todo.completed"
                           (click)="removeTodo(todo.id)"
                         >
                           Удалить
@@ -79,7 +83,7 @@
             </div>
 
             <ng-template #noTodos>
-                <p>Нет никаких задач...</p>
+              <p>Нет никаких задач...</p>
             </ng-template>
           </div>
 
