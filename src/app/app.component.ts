@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   loading = false;
 
+  error=''
+
   constructor(private todosService: TodosService) {}
 
   ngOnInit() {
@@ -46,7 +48,12 @@ export class AppComponent implements OnInit {
       console.log('get response', response);
       this.todos = response;
       this.loading = false;
-    })
+    },
+    error => {
+        this.error = error.message;
+        this.loading = false;
+    }
+    )
   }
 
   removeTodo(id: number) {
