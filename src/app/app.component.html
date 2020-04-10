@@ -10,11 +10,23 @@
 
             <div class="form-group">
               <label for="name">Название</label>
-              <input id="name" class="form-control" type="name" name="name" />
+              <input
+                id="name"
+                class="form-control"
+                type="name"
+                name="name"
+                [(ngModel)]="todoTitle"
+              />
             </div>
 
             <div class="btn-group">
-              <button type="button" class="btn btn-secondary">Добавить</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="addTodo()"
+              >
+                Добавить
+              </button>
               <button type="button" class="btn btn-secondary">Загрузить</button>
             </div>
           </div>
@@ -24,26 +36,33 @@
       <div class="col-12 col-md-6">
         <div class="card">
           <div class="list-group" *ngFor="let todo of todos">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <span
+                    [class.todos-complete]="todo.completed"
+                    class="font-weight-light todo-name"
+                  >
+                    {{ todo.title }}
+                  </span>
+                </div>
 
-              <div class="list-group-item">
-                <div class="row">
-
-                  <div class="col">
-                      <span [class.todos-complete]="todo.completed"  class="font-weight-light todo-name">
-                         {{todo.title}}
-                      </span>
+                <div class="col d-flex justify-content-end align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm">
+                      Завершить
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm"
+                      [disabled]="todo.completed"
+                    >
+                      Удалить
+                    </button>
                   </div>
-
-                  <div class="col d-flex justify-content-end align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-primary btn-sm">Завершить</button>
-                      <button type="button" class="btn btn-danger btn-sm" [disabled]="todo.completed">Удалить</button>
-                    </div>
-                  </div>
-
                 </div>
               </div>
-
+            </div>
           </div>
         </div>
       </div>
